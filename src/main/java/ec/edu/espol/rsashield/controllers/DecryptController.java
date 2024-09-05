@@ -15,6 +15,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -29,6 +32,8 @@ public class DecryptController implements Initializable {
     TextField textFieldModulusN;
     @FXML
     TextArea textAreaDecryptMessages;
+    @FXML
+    BorderPane bp;
 //    @FXML
 //    Button buttonDecrypt;
 
@@ -37,7 +42,11 @@ public class DecryptController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(680);
+        imageView.setFitHeight(480);
+        bp.getChildren().add(0, imageView);
     }
 
     @FXML

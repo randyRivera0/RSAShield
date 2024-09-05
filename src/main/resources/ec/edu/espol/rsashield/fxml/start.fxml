@@ -1,16 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.rsashield.controllers.StartController">
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.rsashield.controllers.StartController">
    <center>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Obtener Claves" />
-            <Button mnemonicParsing="false" onAction="#encrypt" text="Encriptar" />
-            <Button mnemonicParsing="false" onAction="#decrypt" text="Desencriptar" />
+            <Text fill="#32a4e4" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="2.0" style="-fx-effect: dropshadow(gaussian, black, 4, 0.3, 1, 1);" text="Encriptador y Desencriptador RSA ">
+               <font>
+                  <Font name="Consolas Bold" size="27.0" />
+               </font>
+            </Text>
+            <Button mnemonicParsing="false" style="-fx-background-color: #0a3b6e;" text="Obtener Claves" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Lucida Console" size="16.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#encrypt" style="-fx-background-color: #0a3b6e; -fx-effect: dropshadow(gaussian, black, 4, 0.3, 1, 1);" text="Encriptar" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Lucida Console" size="19.0" />
+               </font></Button>
+            <Button mnemonicParsing="false" onAction="#decrypt" style="-fx-background-color: #0a3b6e; -fx-effect: dropshadow(gaussian, black, 4, 0.3, 1, 1);" text="Desencriptar" textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Lucida Console" size="19.0" />
+               </font></Button>
          </children>
       </VBox>
    </center>

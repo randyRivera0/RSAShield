@@ -11,6 +11,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -18,13 +21,18 @@ import javafx.fxml.Initializable;
  * @author User Dell
  */
 public class StartController implements Initializable {
-
+    @FXML
+    BorderPane bp;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(680);
+        imageView.setFitHeight(480);
+        bp.getChildren().add(0, imageView); // Agregar imagen al fondo
     }    
     
     @FXML
