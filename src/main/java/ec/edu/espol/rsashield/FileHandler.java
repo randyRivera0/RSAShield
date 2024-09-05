@@ -32,6 +32,22 @@ public class FileHandler {
         String encryptedListAsString = encryptedListToString(encryptedPassword);
         appendToFile(encryptedListAsString);
     }
+    
+    public static void storePassword (BigInteger p, BigInteger q, String message) {
+        RSAEncryption.KeyPair keyPair = RSAEncryption.generateKeyPair(p, q);
+        RSAEncryption.PublicKey publicKey = keyPair.getPublicKey();
+        RSAEncryption.PrivateKey privateKey = keyPair.getPrivateKey();
+
+        System.out.println("Public Key: " + publicKey.getKey() + ", " + publicKey.getN());
+        System.out.println("Private Key: " + privateKey.getKey() + ", " + privateKey.getN());
+
+        // String message = askForPassword();
+        BigInteger[] encryptedPassword = RSAEncryption.encrypt(publicKey, message);
+        System.out.println("Encrypted Message: " + encryptedListToString(encryptedPassword));
+
+        String encryptedListAsString = encryptedListToString(encryptedPassword);
+        appendToFile(encryptedListAsString);
+    }
 
     public static String encryptedListToString(BigInteger[] encryptedMsg) {
         StringBuilder sb = new StringBuilder();
@@ -83,6 +99,33 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
+    
+    public static String retrievePassword(BigInteger d, BigInteger n) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("passwords.txt"))) {
+            String line;
+            BigInteger[] privateKeyValues = new BigInteger[2];
+            privateKeyValues[0] = d;
+            privateKeyValues[1] = n;
+            RSAEncryption.PrivateKey privateKey = new RSAEncryption.PrivateKey(privateKeyValues[0], privateKeyValues[1]);
+
+            while ((line = bufferedReader.readLine()) != null) {
+                // Convert the string to a list of integers
+                String[] numbers = line.split(" ");
+                BigInteger[] numbersList = new BigInteger[numbers.length];
+                for (int i = 0; i < numbers.length; i++) {
+                    numbersList[i] = new BigInteger(numbers[i]);
+                }
+
+                String decryptedMsg = RSAEncryption.decrypt(privateKey, numbersList);
+
+                System.out.println("Decrypted Message: " + decryptedMsg);
+                return decryptedMsg;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static BigInteger askForPrime() {
         Scanner scanner = new Scanner(System.in);
@@ -99,10 +142,5 @@ public class FileHandler {
         System.out.print("Enter the message: ");
         return scanner.nextLine();
     }
-
-    public static void maing(String[] args) {
-        // Example Usage
-        storePassword();
-        // retrievePassword(); // Uncomment to test password retrieval
-    }
+    
 }

@@ -1,6 +1,7 @@
 module ec.edu.espol.rsashield {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.base;
 
     // Export the main package to make it accessible to other modules
     exports ec.edu.espol.rsashield;
