@@ -4,7 +4,9 @@
  */
 package ec.edu.espol.rsashield.controllers;
 
+import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.FileHandler;
+import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,22 +29,29 @@ public class EncryptController implements Initializable {
     TextField textFieldPrime2;
     @FXML
     TextArea textAreaMessage;
-    
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    
+        //
+    }
+
     @FXML
-    public void encrypt(ActionEvent event){
+    public void encrypt(ActionEvent event) {
         BigInteger p = new BigInteger(textFieldPrime1.getText());
         BigInteger q = new BigInteger(textFieldPrime2.getText());
         String message = textAreaMessage.getText();
         FileHandler.storePassword(p, q, message);
+    }
+
+    @FXML
+    private void returnButton(ActionEvent event) {
+        try {
+            App.setRoot("start");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }

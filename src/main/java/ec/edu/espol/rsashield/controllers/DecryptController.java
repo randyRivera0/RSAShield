@@ -4,7 +4,9 @@
  */
 package ec.edu.espol.rsashield.controllers;
 
+import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.FileHandler;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -27,23 +29,32 @@ public class DecryptController implements Initializable {
     TextField textFieldModulusN;
     @FXML
     TextArea textAreaDecryptMessages;
-    @FXML
-    Button buttonDecrypt;
-    
+//    @FXML
+//    Button buttonDecrypt;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
-    
+    }
+
     @FXML
-    public void decrypt(ActionEvent event){
+    public void decrypt(ActionEvent event) {
         String StringD = textFieldExponentD.getText();
         String StringN = textFieldModulusN.getText();
         String message = FileHandler.retrievePassword(StringD, StringN);
         textAreaDecryptMessages.setText(message);
     }
-    
+
+    @FXML
+    private void returnButton(ActionEvent event) {
+        try {
+            App.setRoot("start");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
