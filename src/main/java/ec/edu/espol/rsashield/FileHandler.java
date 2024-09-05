@@ -100,14 +100,15 @@ public class FileHandler {
         }
     }
     
-    public static String retrievePassword(BigInteger d, BigInteger n) {
+    public static String retrievePassword(String StringD, String StringN) {
+        StringBuilder sb = new StringBuilder();
+        BigInteger d = new BigInteger(StringD.trim());
+        BigInteger n = new BigInteger(StringN.trim());
+        RSAEncryption.PrivateKey privateKey = new RSAEncryption.PrivateKey(d, n);
+
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("passwords.txt"))) {
             String line;
-            BigInteger[] privateKeyValues = new BigInteger[2];
-            privateKeyValues[0] = d;
-            privateKeyValues[1] = n;
-            RSAEncryption.PrivateKey privateKey = new RSAEncryption.PrivateKey(privateKeyValues[0], privateKeyValues[1]);
-
+            
             while ((line = bufferedReader.readLine()) != null) {
                 // Convert the string to a list of integers
                 String[] numbers = line.split(" ");
@@ -117,14 +118,13 @@ public class FileHandler {
                 }
 
                 String decryptedMsg = RSAEncryption.decrypt(privateKey, numbersList);
-
                 System.out.println("Decrypted Message: " + decryptedMsg);
-                return decryptedMsg;
+                sb.append(" - ").append(decryptedMsg).append("\n");               
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return sb.toString();
     }
 
     public static BigInteger askForPrime() {

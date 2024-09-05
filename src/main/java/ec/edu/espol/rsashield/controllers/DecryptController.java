@@ -5,7 +5,6 @@
 package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.FileHandler;
-import java.math.BigInteger;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -41,9 +40,9 @@ public class DecryptController implements Initializable {
     
     @FXML
     public void decrypt(ActionEvent event){
-        BigInteger d = new BigInteger(textFieldExponentD.getText().trim());
-        BigInteger n = new BigInteger(textFieldModulusN.getText().trim());
-        String message = FileHandler.retrievePassword(d, n);
+        String StringD = textFieldExponentD.getText();
+        String StringN = textFieldModulusN.getText();
+        String message = FileHandler.retrievePassword(StringD, StringN);
         textAreaDecryptMessages.setText(message);
     }
     

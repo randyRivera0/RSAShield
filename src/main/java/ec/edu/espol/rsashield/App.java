@@ -35,10 +35,6 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        BigInteger p = askForPrime();
-        BigInteger q = askForPrime();
-        FileHandler.storePassword(p, q, "holis");
-        FileHandler.retrievePassword();
         launch();
     }
 }
