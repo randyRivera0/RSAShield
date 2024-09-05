@@ -4,7 +4,9 @@
  */
 package ec.edu.espol.rsashield.controllers;
 
+import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.FileHandler;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -46,4 +48,12 @@ public class DecryptController implements Initializable {
         textAreaDecryptMessages.setText(message);
     }
     
+    @FXML
+    private void returnButton(ActionEvent event) {
+        try {
+            App.setRoot("start");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 }
