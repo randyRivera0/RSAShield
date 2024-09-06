@@ -7,4 +7,6 @@ ec\edu\espol\rsashield\RSAEncryption.class
 ec\edu\espol\rsashield\controllers\EncryptController.class
 ec\edu\espol\rsashield\RSAEncryption$PrivateKey.class
 module-info.class
+ec\edu\espol\rsashield\controllers\KeysController.class
+ec\edu\espol\rsashield\Encryption.class
 ec\edu\espol\rsashield\RSAEncryption$KeyPair.class

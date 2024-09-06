@@ -85,6 +85,7 @@ public class RSAEncryption {
         }
         BigInteger n = p.multiply(q);
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
+        Encryption.setPhi(phi);
 
         SecureRandom random = new SecureRandom();
         BigInteger e;
@@ -94,6 +95,8 @@ public class RSAEncryption {
 
         BigInteger d = modInverse(e, phi);
 
+        Encryption.setE(e);
+        Encryption.setD(d);
         return new KeyPair(new PublicKey(e, n), new PrivateKey(d, n));
     }
 

@@ -6,35 +6,37 @@ package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.Encryption;
-import ec.edu.espol.rsashield.FileHandler;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
  *
  * @author User Dell
  */
-public class DecryptController implements Initializable {
+public class KeysController implements Initializable {
     
     Encryption encryption;
-
-    @FXML
-    TextField textFieldExponentD;
-    @FXML
-    TextField textFieldModulusN;
-    @FXML
-    TextArea textAreaDecryptMessages;
-    @FXML
-    Button buttonDecrypt;
     
+    @FXML
+    TextField textFieldP;
+    @FXML
+    TextField textFieldQ;
+    @FXML
+    Text textN;
+    @FXML
+    Text textPhi;
+    @FXML
+    Text textE;
+    @FXML
+    Text textD;
+
     /**
      * Initializes the controller class.
      */
@@ -42,15 +44,14 @@ public class DecryptController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         encryption = App.getEncryption();
-    }    
-    
-    @FXML
-    public void decrypt(ActionEvent event){
-        String StringD = textFieldExponentD.getText();
-        String StringN = textFieldModulusN.getText();
-        String message = FileHandler.retrievePassword(StringD, StringN);
-        textAreaDecryptMessages.setText(message);
-    }
+        textFieldP.setText(Encryption.getP().toString());
+        textFieldQ.setText(Encryption.getQ().toString());
+        textN.setText(Encryption.getKeyPair().getPrivateKey().getN().toString());
+        textPhi.setText(Encryption.getPhi().toString());
+        textE.setText(Encryption.getE().toString());
+        textD.setText(Encryption.getD().toString());
+        
+    } 
     
     @FXML
     private void returnButton(ActionEvent event) {
@@ -60,4 +61,5 @@ public class DecryptController implements Initializable {
             ex.printStackTrace();
         }
     }
+    
 }

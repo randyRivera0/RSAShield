@@ -5,7 +5,10 @@
 package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.App;
+import ec.edu.espol.rsashield.Encryption;
+import ec.edu.espol.rsashield.RSAEncryption;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -21,6 +24,9 @@ import javafx.scene.layout.BorderPane;
  * @author User Dell
  */
 public class StartController implements Initializable {
+    
+    Encryption encryption;
+    
     @FXML
     BorderPane bp;
     /**
@@ -28,6 +34,9 @@ public class StartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        encryption = App.getEncryption();
+        
         Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(680);
@@ -49,6 +58,15 @@ public class StartController implements Initializable {
     public void decrypt(ActionEvent event){
         try {
             App.setRoot("decrypt");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    @FXML
+    public void getKeys(ActionEvent event){
+        try {
+            App.setRoot("keys");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

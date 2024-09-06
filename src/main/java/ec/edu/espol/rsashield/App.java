@@ -17,7 +17,12 @@ import java.math.BigInteger;
 public class App extends Application {
 
     private static Scene scene;
+    private static Encryption encryption;
 
+    public static Encryption getEncryption() {
+        return encryption;
+    }
+    
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("start"), 640, 480);
@@ -35,6 +40,12 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        Encryption encryption = new Encryption();
+        BigInteger p = new BigInteger("53");
+        BigInteger q = new BigInteger("61");
+        Encryption.setP(p);
+        Encryption.setQ(q);
+        Encryption.setKeyPair(RSAEncryption.generateKeyPair(p, q));
         launch();
     }
 }

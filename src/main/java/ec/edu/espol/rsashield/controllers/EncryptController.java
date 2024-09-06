@@ -5,7 +5,9 @@
 package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.App;
+import ec.edu.espol.rsashield.Encryption;
 import ec.edu.espol.rsashield.FileHandler;
+import ec.edu.espol.rsashield.RSAEncryption;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -25,6 +27,8 @@ import javafx.scene.layout.BorderPane;
  * @author User Dell
  */
 public class EncryptController implements Initializable {
+    
+    Encryption encryption;
 
     @FXML
     TextField textFieldPrime1;
@@ -40,6 +44,9 @@ public class EncryptController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        encryption = App.getEncryption();
+                
         Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(680);
@@ -51,8 +58,15 @@ public class EncryptController implements Initializable {
     public void encrypt(ActionEvent event) {
         BigInteger p = new BigInteger(textFieldPrime1.getText());
         BigInteger q = new BigInteger(textFieldPrime2.getText());
+        Encryption.setP(p);
+        Encryption.setQ(q);
         String message = textAreaMessage.getText();
-        FileHandler.storePassword(p, q, message);
+        FileHandler.storePassword(message);
+        try {
+            App.setRoot("start");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     @FXML

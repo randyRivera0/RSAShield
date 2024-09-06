@@ -15,10 +15,14 @@ import java.security.SecureRandom;
 import java.util.*;
 public class FileHandler {
 
+    static BigInteger p;
+    static BigInteger q;
+
     public static void storePassword() {
         BigInteger p = askForPrime();
         BigInteger q = askForPrime();
-        RSAEncryption.KeyPair keyPair = RSAEncryption.generateKeyPair(p, q);
+//        RSAEncryption.KeyPair keyPair = RSAEncryption.generateKeyPair(p, q);
+        RSAEncryption.KeyPair keyPair = RSAEncryption.generateKeyPair(new BigInteger("53"), new BigInteger("61"));
         RSAEncryption.PublicKey publicKey = keyPair.getPublicKey();
         RSAEncryption.PrivateKey privateKey = keyPair.getPrivateKey();
 
@@ -33,10 +37,13 @@ public class FileHandler {
         appendToFile(encryptedListAsString);
     }
     
-    public static void storePassword (BigInteger p, BigInteger q, String message) {
-        RSAEncryption.KeyPair keyPair = RSAEncryption.generateKeyPair(p, q);
-        RSAEncryption.PublicKey publicKey = keyPair.getPublicKey();
-        RSAEncryption.PrivateKey privateKey = keyPair.getPrivateKey();
+    public static void storePassword (String message) {
+        p = Encryption.getP(); 
+        q = Encryption.getQ();
+        
+        Encryption.setKeyPair(RSAEncryption.generateKeyPair(p, q));
+        RSAEncryption.PublicKey publicKey = Encryption.getKeyPair().getPublicKey();
+        RSAEncryption.PrivateKey privateKey = Encryption.getKeyPair().getPrivateKey();
 
         System.out.println("Public Key: " + publicKey.getKey() + ", " + publicKey.getN());
         System.out.println("Private Key: " + privateKey.getKey() + ", " + privateKey.getN());
