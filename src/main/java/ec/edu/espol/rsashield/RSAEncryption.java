@@ -215,6 +215,14 @@ public class RSAEncryption {
         public BigInteger getN() {
             return n;
         }
+        
+        @Override
+        public String toString() {
+            return "PublicKey{" +
+                   "key=" + key +
+                   ", n=" + n +
+                   '}';
+        }
     }
 
     public static class PrivateKey {
@@ -232,6 +240,14 @@ public class RSAEncryption {
 
         public BigInteger getN() {
             return n;
+        }
+        
+        @Override
+        public String toString() {
+            return "PrivateKey{" +
+                   "key=" + key +
+                   ", n=" + n +
+                   '}';
         }
     }
 

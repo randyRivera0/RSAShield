@@ -6,7 +6,9 @@ package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.Encryption;
+import ec.edu.espol.rsashield.RSAEncryption;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -40,6 +42,10 @@ public class KeysController implements Initializable {
     @FXML
     Text textD;
     @FXML
+    Text textPublicKey;
+    @FXML
+    Text textPrivateKey;
+    @FXML
     BorderPane bp;
 
     /**
@@ -55,6 +61,8 @@ public class KeysController implements Initializable {
         textPhi.setText(Encryption.getPhi().toString());
         textE.setText(Encryption.getE().toString());
         textD.setText(Encryption.getD().toString());
+        textPublicKey.setText(Encryption.getKeyPair().getPublicKey().toString());
+        textPrivateKey.setText(Encryption.getKeyPair().getPrivateKey().toString());
         Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(680);
@@ -69,6 +77,15 @@ public class KeysController implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+    
+    @FXML
+    private void create(ActionEvent event){
+        BigInteger p = new BigInteger(textFieldP.getText());
+        BigInteger q = new BigInteger(textFieldQ.getText());
+        Encryption.setP(p);
+        Encryption.setQ(q);
+        Encryption.setKeyPair(RSAEncryption.generateKeyPair(p, q));
     }
     
 }

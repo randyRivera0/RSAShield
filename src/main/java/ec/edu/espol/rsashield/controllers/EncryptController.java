@@ -63,10 +63,6 @@ public class EncryptController implements Initializable {
 
     @FXML
     public void encrypt(ActionEvent event) {
-        BigInteger p = new BigInteger(textFieldPrime1.getText());
-        BigInteger q = new BigInteger(textFieldPrime2.getText());
-        Encryption.setP(p);
-        Encryption.setQ(q);
         String message = textAreaMessage.getText();
         FileHandler.storePassword(message);
         try {

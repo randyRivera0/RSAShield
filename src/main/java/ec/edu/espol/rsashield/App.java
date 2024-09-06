@@ -41,8 +41,8 @@ public class App extends Application {
 
     public static void main(String[] args) {
         Encryption encryption = new Encryption();
-        BigInteger p = new BigInteger("53");
-        BigInteger q = new BigInteger("61");
+        BigInteger p = new BigInteger("11");
+        BigInteger q = new BigInteger("13");
         Encryption.setP(p);
         Encryption.setQ(q);
         Encryption.setKeyPair(RSAEncryption.generateKeyPair(p, q));
