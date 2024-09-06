@@ -5,17 +5,14 @@
 package ec.edu.espol.rsashield.controllers;
 
 import ec.edu.espol.rsashield.App;
-import ec.edu.espol.rsashield.App;
 import ec.edu.espol.rsashield.Encryption;
 import ec.edu.espol.rsashield.FileHandler;
-import java.io.IOException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -52,11 +49,12 @@ public class DecryptController implements Initializable {
         imageView.setFitWidth(680);
         imageView.setFitHeight(480);
         bp.getChildren().add(0, imageView);
-    }
-
         // TODO
         encryption = App.getEncryption();
-    }    
+    }
+
+        
+        
     
     @FXML
     public void decrypt(ActionEvent event) {
@@ -75,13 +73,4 @@ public class DecryptController implements Initializable {
         }
     }
 
-    
-    @FXML
-    private void returnButton(ActionEvent event) {
-        try {
-            App.setRoot("start");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 }

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\KeysController.java
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\Encryption.java
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\RSAEncryption.java
@@ -8,12 +7,3 @@ C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\EncryptController.java
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\DecryptController.java
 C:\Users\User Dell\Documents\randy\espol\courses\Discrete Mathematics\RSAShield\src\main\java\ec\edu\espol\rsashield\FileHandler.java
-=======
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\StartController.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\module-info.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\App.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\RSAEncryption.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\DecryptController.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\FileHandler.java
-C:\Users\PERSONAL\OneDrive\Escritorio\3semestre\Matemáticas discretas\RSAShield\src\main\java\ec\edu\espol\rsashield\controllers\EncryptController.java
->>>>>>> ac49b007a95e81807ad0f9bf287f96bf4ed35cd9

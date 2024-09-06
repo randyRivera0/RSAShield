@@ -44,9 +44,6 @@ public class EncryptController implements Initializable {
     @FXML
     BorderPane bp;
 
-    @FXML
-    BorderPane bp;
-
     /**
      * Initializes the controller class.
      */
@@ -60,17 +57,11 @@ public class EncryptController implements Initializable {
         imageView.setFitWidth(680);
         imageView.setFitHeight(480);
         bp.getChildren().add(0, imageView);
+
     }
 
-        Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(680);
-        imageView.setFitHeight(480);
-        bp.getChildren().add(0, imageView);
-    }
 
     @FXML
-    public void encrypt(ActionEvent event) {
     public void encrypt(ActionEvent event) {
         BigInteger p = new BigInteger(textFieldPrime1.getText());
         BigInteger q = new BigInteger(textFieldPrime2.getText());
@@ -94,12 +85,5 @@ public class EncryptController implements Initializable {
         }
     }
 
-    @FXML
-    private void returnButton(ActionEvent event) {
-        try {
-            App.setRoot("start");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
+
 }
