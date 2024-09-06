@@ -86,28 +86,66 @@ public class RSAEncryption {
         BigInteger n = p.multiply(q);
         BigInteger phi = (p.subtract(BigInteger.ONE)).multiply(q.subtract(BigInteger.ONE));
         Encryption.setPhi(phi);
-
+       
+        BigInteger e = getEValue(phi);
+        
+        /*
         SecureRandom random = new SecureRandom();
         BigInteger e;
         do {
             e = new BigInteger(phi.bitLength(), random);
         } while (e.compareTo(BigInteger.ONE) <= 0 || e.compareTo(phi) >= 0 || !gcd(e, phi).equals(BigInteger.ONE));
-
+        */
+        
         BigInteger d = modInverse(e, phi);
+        
 
         Encryption.setE(e);
         Encryption.setD(d);
         return new KeyPair(new PublicKey(e, n), new PrivateKey(d, n));
+    }
+    
+    public static BigInteger getEValue(BigInteger phi){
+        BigInteger e = BigInteger.valueOf(2); // Start with the smallest possible value for e
+        while (e.compareTo(phi) < 0) {
+            if (gcd(e, phi).equals(BigInteger.ONE)) {
+                // Found a valid e, use it here
+                System.out.println("Selected e: " + e);
+                break;
+            }
+            e = e.add(BigInteger.ONE); // Increment e
+        }
+        
+        return e;
     }
 
     // Function to encrypt a plaintext message using the public key
     public static BigInteger[] encrypt(PublicKey pk, String plaintext) {
         BigInteger key = pk.getKey();
         BigInteger n = pk.getN();
+        
+        // Print the plaintext to debug
+        System.out.println("Plaintext: " + plaintext);
+        System.out.println("Character -> Code Point -> BigInteger -> Encrypted");
+    
+        /*
         return plaintext.chars()
                         .mapToObj(c -> BigInteger.valueOf(c))
                         .map(c -> c.modPow(key, n))
                         .toArray(BigInteger[]::new);
+        */
+        
+        return plaintext.chars()
+                    .mapToObj(c -> {
+                        BigInteger codePoint = BigInteger.valueOf(c); // Unicode code point
+                        BigInteger encrypted = codePoint.modPow(key, n); // Encrypted value
+
+                        // Print each step for debugging
+                        System.out.println((char) c + " -> " + c + " -> " + codePoint + " -> " + encrypted);
+
+                        return encrypted;
+                    })
+                    .toArray(BigInteger[]::new);
     }
 
     // Function to decrypt a ciphertext message using the private key
