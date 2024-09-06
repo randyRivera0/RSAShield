@@ -8,11 +8,11 @@ package ec.edu.espol.rsashield;
  *
  * @author Gecko
  */
-
 import java.io.*;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 import java.util.*;
+
 public class FileHandler {
 
     static BigInteger p;
@@ -36,11 +36,11 @@ public class FileHandler {
         String encryptedListAsString = encryptedListToString(encryptedPassword);
         appendToFile(encryptedListAsString);
     }
-    
-    public static void storePassword (String message) {
-        p = Encryption.getP(); 
+
+    public static void storePassword(String message) {
+        p = Encryption.getP();
         q = Encryption.getQ();
-        
+
         Encryption.setKeyPair(RSAEncryption.generateKeyPair(p, q));
         RSAEncryption.PublicKey publicKey = Encryption.getKeyPair().getPublicKey();
         RSAEncryption.PrivateKey privateKey = Encryption.getKeyPair().getPrivateKey();
@@ -65,8 +65,7 @@ public class FileHandler {
     }
 
     public static void appendToFile(String content) {
-        try (FileWriter fileWriter = new FileWriter("passwords.txt", true);
-             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+        try (FileWriter fileWriter = new FileWriter("passwords.txt", true); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.write(content);
             bufferedWriter.newLine();
         } catch (IOException e) {
@@ -106,16 +105,16 @@ public class FileHandler {
             e.printStackTrace();
         }
     }
-    
+
     public static String retrievePassword(String StringD, String StringN) {
-        StringBuilder sb = new StringBuilder();
+        String lastDecryptedMsg = null;
         BigInteger d = new BigInteger(StringD.trim());
         BigInteger n = new BigInteger(StringN.trim());
         RSAEncryption.PrivateKey privateKey = new RSAEncryption.PrivateKey(d, n);
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader("passwords.txt"))) {
             String line;
-            
+
             while ((line = bufferedReader.readLine()) != null) {
                 // Convert the string to a list of integers
                 String[] numbers = line.split(" ");
@@ -126,14 +125,42 @@ public class FileHandler {
 
                 String decryptedMsg = RSAEncryption.decrypt(privateKey, numbersList);
                 System.out.println("Decrypted Message: " + decryptedMsg);
-                sb.append(" - ").append(decryptedMsg).append("\n");               
+                lastDecryptedMsg = decryptedMsg;
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return sb.toString();
+
+        return lastDecryptedMsg; // Devuelve solo el último mensaje descifrado
     }
 
+    // dejo la copia del método utilizado antes por si hay algun cambio que deba hacerse luego.
+//    public static String retrievePassword(String StringD, String StringN) {
+//        StringBuilder sb = new StringBuilder();
+//        BigInteger d = new BigInteger(StringD.trim());
+//        BigInteger n = new BigInteger(StringN.trim());
+//        RSAEncryption.PrivateKey privateKey = new RSAEncryption.PrivateKey(d, n);
+//
+//        try (BufferedReader bufferedReader = new BufferedReader(new FileReader("passwords.txt"))) {
+//            String line;
+//            
+//            while ((line = bufferedReader.readLine()) != null) {
+//                // Convert the string to a list of integers
+//                String[] numbers = line.split(" ");
+//                BigInteger[] numbersList = new BigInteger[numbers.length];
+//                for (int i = 0; i < numbers.length; i++) {
+//                    numbersList[i] = new BigInteger(numbers[i]);
+//                }
+//
+//                String decryptedMsg = RSAEncryption.decrypt(privateKey, numbersList);
+//                System.out.println("Decrypted Message: " + decryptedMsg);
+//                sb.append(" - ").append(decryptedMsg).append("\n");               
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return sb.toString();
+//    }
     public static BigInteger askForPrime() {
         Scanner scanner = new Scanner(System.in);
         BigInteger p;
@@ -149,5 +176,5 @@ public class FileHandler {
         System.out.print("Enter the message: ");
         return scanner.nextLine();
     }
-    
+
 }
