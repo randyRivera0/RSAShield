@@ -13,6 +13,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 
 /**
@@ -36,6 +39,8 @@ public class KeysController implements Initializable {
     Text textE;
     @FXML
     Text textD;
+    @FXML
+    BorderPane bp;
 
     /**
      * Initializes the controller class.
@@ -50,7 +55,11 @@ public class KeysController implements Initializable {
         textPhi.setText(Encryption.getPhi().toString());
         textE.setText(Encryption.getE().toString());
         textD.setText(Encryption.getD().toString());
-        
+        Image image = new Image(getClass().getResourceAsStream("/img/fondorsa.jpg"));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(680);
+        imageView.setFitHeight(480);
+        bp.getChildren().add(0, imageView);
     } 
     
     @FXML
