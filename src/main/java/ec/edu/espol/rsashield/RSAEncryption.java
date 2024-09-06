@@ -218,10 +218,8 @@ public class RSAEncryption {
         
         @Override
         public String toString() {
-            return "PublicKey{" +
-                   "key=" + key +
-                   ", n=" + n +
-                   '}';
+            return  key +
+                   ", " + n;
         }
     }
 
@@ -244,10 +242,9 @@ public class RSAEncryption {
         
         @Override
         public String toString() {
-            return "PrivateKey{" +
-                   "key=" + key +
-                   ", n=" + n +
-                   '}';
+            return  key +
+                   ", " + n 
+                   ;
         }
     }
 
